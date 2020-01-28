@@ -2,6 +2,7 @@ const fs = require("fs");
 const util = require("util");
 const axios = require("axios");
 const inquirer = require("inquirer");
+const request = require("request");
 
 // const questions = [
 
@@ -15,14 +16,23 @@ const inquirer = require("inquirer");
 
 // init();
 
+// function getStars(res) {
+//     const
+// }
 
 inquirer
-    .prompt({
-        message: "Enter your GitHub username:",
-        name: "username"
-    })
+    .prompt(
+        {
+            message: "Enter your GitHub username:",
+            name: "username"
+        },
+        {
+            // message: "What's your favorite color?",
+            // color: "color"
+        })
     .then(function ({ username }) {
         const queryUrl = `https://api.github.com/users/${username}`;
+        const starUrl = `https://api.github.com/users/${username}/starred`
         console.log(queryUrl)
 
         axios.get(queryUrl).then(function (res) {
@@ -31,7 +41,7 @@ inquirer
             const profileURL = res.data.html_url
             const profileIMG = res.data.avatar_url
             const followCount = res.data.following
-            const starsURL = res.data.starred_url
+            // const starsURL = res.data.starred_url
             const location = res.data.location
             const bio = res.data.bio
             const blog = res.data.blog
@@ -45,5 +55,10 @@ inquirer
             // console.log(repos)
             // console.log(followCount)
 
+        });
+
+        axios.get(starUrl).then(function (res) {
+            const stars = res
+            console.log(res.data.length)
         });
     });

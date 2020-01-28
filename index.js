@@ -2,11 +2,20 @@ const fs = require("fs");
 const util = require("util");
 const axios = require("axios");
 const inquirer = require("inquirer");
-const request = require("request");
+// const request = require("request");
 
-// const questions = [
-
-// ];
+const questions = [
+    {
+        type: "input",
+        message: "Enter your GitHub username:",
+        name: "username"
+    },
+    {
+        type: "input",
+        message: "What's your favorite color?",
+        name: "color"
+    }
+];
 
 // function writeToFile(fileName, data) {
 
@@ -21,15 +30,7 @@ const request = require("request");
 // }
 
 inquirer
-    .prompt(
-        {
-            message: "Enter your GitHub username:",
-            name: "username"
-        },
-        {
-            // message: "What's your favorite color?",
-            // color: "color"
-        })
+    .prompt(questions)
     .then(function ({ username }) {
         const queryUrl = `https://api.github.com/users/${username}`;
         const starUrl = `https://api.github.com/users/${username}/starred`

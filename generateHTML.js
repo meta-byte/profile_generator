@@ -48,14 +48,14 @@ function generateHTML(git, color, stars) {
           }
   
           footer {
-              margin-top: 100px;
+              margin-top: 80px;
           }
       </style>
   </head>
   
   <body class="">
       <div class="">
-          <div class="row ${color} z-depth-1">
+          <div class="row ${color} z-depth-0">
               <div class="col s12 center ${color} darken-2">
                   <h1>${git.data.name}</h1>
               </div>
@@ -69,7 +69,7 @@ function generateHTML(git, color, stars) {
   
                   </div>
                   <div class="col s4">
-                      <img class="responsive-img circle z-depth-2"
+                      <img class="responsive-img circle z-depth-0"
                           src="${git.data.avatar_url}">
                   </div>
                   <div class="col s4 center-align">
@@ -92,7 +92,7 @@ function generateHTML(git, color, stars) {
               </div>
               <div class="row">
                   <div class="col s6 center">
-                      <div class="card ${color}">
+                      <div class="card ${color} z-depth-0">
                           <div class="card-content white-text">
                               <span class="card-title">Public Repositories</span>
                               <h3>${git.data.public_repos}</h3>
@@ -100,7 +100,7 @@ function generateHTML(git, color, stars) {
                       </div>
                   </div>
                   <div class="col s6 center">
-                      <div class="card ${color}">
+                      <div class="card ${color} z-depth-0">
                           <div class="card-content white-text">
                               <span class="card-title">Starred</span>
                               <h3>${stars}</h3>
@@ -111,7 +111,7 @@ function generateHTML(git, color, stars) {
               </div>
               <div class="row">
                   <div class="col s6 center">
-                      <div class="card ${color}">
+                      <div class="card ${color} z-depth-0">
                           <div class="card-content white-text">
                               <span class="card-title">Followers</span>
                               <h3>${git.data.followers}</h3>
@@ -119,7 +119,7 @@ function generateHTML(git, color, stars) {
                       </div>
                   </div>
                   <div class="col s6 center">
-                      <div class="card ${color}">
+                      <div class="card ${color} z-depth-0">
                           <div class="card-content white-text">
                               <span class="card-title">Following</span>
                               <h3>${git.data.following}</h3>
@@ -144,5 +144,6 @@ function generateHTML(git, color, stars) {
   
   </html>`
 }
+
 
 module.exports = generateHTML

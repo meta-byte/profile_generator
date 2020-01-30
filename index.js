@@ -2,7 +2,10 @@ const fs = require("fs");
 const util = require("util");
 const axios = require("axios");
 const inquirer = require("inquirer");
-// const request = require("request");
+const generate = require("./generateHTML");
+const puppeteer = require("puppeteer");
+
+const writeFileAsync = util.promisify(fs.writeFile);
 
 const questions = [
     {
@@ -17,49 +20,46 @@ const questions = [
     }
 ];
 
-// function writeToFile(fileName, data) {
-
-// }
-
-// function init() {
-
-// init();
-
-// function getStars(res) {
-//     const
-// }
+var profile = ""
 
 inquirer
     .prompt(questions)
-    .then(function ({ username }) {
-        const queryUrl = `https://api.github.com/users/${username}`;
-        const starUrl = `https://api.github.com/users/${username}/starred`
-        console.log(queryUrl)
+    .then(function (answers) {
+        let queryUrl = `https://api.github.com/users/${answers.username}`;
+        let starUrl = `https://api.github.com/users/${answers.username}/starred`
+        const requestOne = axios.get(queryUrl);
+        const requestTwo = axios.get(starUrl);
+        const color = answers.color
 
-        axios.get(queryUrl).then(function (res) {
-            const username = res.data.login
-            const name = res.data.name
-            const profileURL = res.data.html_url
-            const profileIMG = res.data.avatar_url
-            const followCount = res.data.following
-            // const starsURL = res.data.starred_url
-            const location = res.data.location
-            const bio = res.data.bio
-            const blog = res.data.blog
-            const repos = res.data.public_repos
-            const company = res.data.company
-            // console.log(res)
-            // console.log(username)
-            // console.log(name)
-            // console.log(profileURL)
-            // console.log(bio)
-            // console.log(repos)
-            // console.log(followCount)
+        axios
+            .all([requestOne, requestTwo])
+            .then(axios.spread(function (...responses) {
+                const responseOne = responses[0]
+                const responseTwo = responses[1]
+                const stars = responseTwo.data.length
 
-        });
-
-        axios.get(starUrl).then(function (res) {
-            const stars = res
-            console.log(res.data.length)
-        });
+                const html = generate(responseOne, color, stars);
+                profile = html.toString()
+                return writeFileAsync("index.html", html);
+            }));
     });
+
+
+(async function () {
+    try {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+
+        await page.setContent()
+        await page.emulateMedia('screen')
+        await page.pdf({
+            path: 'profile.pdf',
+            format: 'A4',
+            printBackground: true
+        });
+
+        await browser.close();
+    } catch (error) {
+        console.log("Error")
+    }
+})();

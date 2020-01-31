@@ -3,32 +3,50 @@
 
 ## Overview
 
+A command line application that allows a user to enter a github username and a color and a simple profile will be generated in PDF format. The profile gathers this information from the Github API. The Materialize CSS framework was used for the styling of the profile. 
+
 
 ### Gallery
 
-![Demo](assets/images/shouldiskidemo.gif "Should I Ski Today?")
+images/profile generator demo.gif
+![Demo](./images/ProfileGeneratorDemo.gif "Generate a user profile!")
 
 
 ## Tech and Features Used
 
-
 | Feature       | Summary                                                                                                  | 
 | ------------- | -------------------------------------------------------------------------------------------------------- |
-| Materialize CSS Framework | Used Materialize to style and index.html and make it responsive.                              |
-| Javascript    | Used Javascript to update main index.html with resort weather information, recent tweets and a google map. |
-| JQuery        | Used JQuery to simplify working with DOM and perform ajax API calls.                             |
-| Weather Unlocked API | Robust third party weather API that includes snow reports and forecasts for resorts. The subscription tier used meant that we needed to control what resorts users can search. This was done with a drop down that is tied to an array of searchable resorts. |
-|Twitter Open API| Twitter open API allowed us to embed tweets from any twitter handle. We tied this to the array of resorts we created to allow us to display tweets from any resort in the future provided they have a twitter handle.|
-|Google Maps API| Google maps API allowed us to embed a map that centers around and marks a designated location. This is also controlled by our resorts array. |
+| Materialize CSS Framework | Used Materialize to style the HTML document that is converted into "profile.pdf"             |
+| Node.js       | Node.js was used to run the application in testing and is what the app is designed to use.               |
+| Puppeteer     | The Puppeteer package was used to create a PDF using HTML input.                                           |
+| Inquirer      | Inquirer was used to ask the user questions and store their answers for use with Materialize and Github API. |
+| Axios         | All Github API calls were done using the Axios package.                                                    |
+
+
+## Required Packages
+* Inquirer
+* Puppeteer
+* Axios
 
 
 ## How to use
 
-### Required Packages
-* Inquirer
-* 
+* Run Node on index.js
+* Enter a github username
+* Enter a color
+* "profile.pdf" will be saved in the root directory of the
 
 
 ## Known Bugs
 
+* Currently no Error handling.
+* "Null" will be displayed in areas where the user has not filled in profile
+
+
 ## Contact Info
+
+mail: hylander.garrett@gmail.com
+
+Phone: (801)-592-0371
+
+[Linkedin](https://www.linkedin.com/in/garrett-h-859007a0/)

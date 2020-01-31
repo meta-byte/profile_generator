@@ -8,7 +8,6 @@ A command line application that allows a user to enter a github username and a c
 
 ### Gallery
 
-images/profile generator demo.gif
 ![Demo](/images/ProfileGeneratorDemo.gif/ "Generate a user profile!")
 
 

@@ -41,11 +41,3 @@ A command line application that allows a user to enter a github username and a c
 * Currently no Error handling.
 * "Null" will be displayed in areas where the user has not filled in profile
 
-
-## Contact Info
-
-mail: hylander.garrett@gmail.com
-
-Phone: (801)-592-0371
-
-[Linkedin](https://www.linkedin.com/in/garrett-h-859007a0/)
